@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-message {
+            color: #FFD700;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: block;
+            min-height: 18px;
+        }
+        input.error-field {
+            border: 2px solid #FFA500 !important;
+            background-color: #fff3e0;
+        }
+        .terms.error-field {
+            border: 1px solid #FFA500;
+            padding: 4px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .small-note {
+            font-size: 0.75rem;
+            color: #f0f0f0;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+        <img src="https://keithtselinguist.wordpress.com/wp-content/uploads/2019/07/mtr_logo_3-2.png" alt="MTR logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Fare Matrix</a></li>
+            <li><a href="#">Schedule</a></li>
+            <li><a href="#">Stations</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <a href="#" class="book">Book Now</a>
+            <a href="#" class="create-btn">Create Account</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <br>
+        <div class="registration-card">
+            <div class="left-panel">
+            <div class="profile-placeholder" id="profileContainer">
+              <img id="profileImage" src="#" alt="Profile" style="display: none; width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                <span id="profileText">Profile Image</span>
+            </div>
+             <input type="file" id="photoUpload" accept="image/*">
+             <button class="upload-btn" id="uploadPhotoBtn">Upload Photo</button>
+        </div>
+
+            <div class="right-panel">
+                <h1>REGISTRATION 登記</h1>
+                <p class="instructions">
+                    Please fill out all required fields in the registration form with accurate information.
+                </p>
+                <form id="regForm" novalidate>
+                    <label>First Name 名字</label>
+                    <input type="text" id="firstName">
+
+                    <label>Last Name 姓</label>
+                    <input type="text" id="lastName">
+
+                    <div class="row">
+                        <div>
+                            <label>Age 年齡</label>
+                            <input type="number" id="age">
+                        </div>
+                        <div>
+                            <label>Contact Number 聯絡電話</label>
+                            <input type="text" id="contact">
+                        </div>
+                    </div>
+
+                    <label>Email 電郵</label>
+                    <input type="email" id="email">
+
+                    <label>Enter your username 用戶名</label>
+                    <input type="text" id="username">
+                    <span id="usernameError" class="error-message"></span>
+                    <div class="small-note">Username: 5-20 characters, letters/numbers/underscore, no spaces</div>
+
+                    <label>Enter your password 密碼</label>
+                    <input type="password" id="password">
+                    <span id="passwordError" class="error-message"></span>
+                    <div class="small-note">Password: min 8 characters, at least 1 uppercase, 1 lowercase, 1 number, 1 special symbol(@$!%*?&)</div>
+
+                    <div class="terms" id="termsContainer">
+                        <input type="checkbox" id="termsCheckbox">
+                        <span>I accept the Terms of Use and Privacy Policy</span>
+                    </div>
+                    <span id="termsError" class="error-message"></span>
+
+                    <button class="submit-btn" type="submit" id="submitBtn">Create my account 創造</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Enzo Isidro & Ethan Tuvilla | 9 - Ruby ©2026
+    </footer>
+
+    <script>
+        (function() {
+            function setFieldError(inputElement, errorSpanId, message) {
+                const errorSpan = document.getElementById(errorSpanId);
+                if (errorSpan) errorSpan.textContent = message || '';
+                if (inputElement) {
+                    if (message) {
+                        inputElement.classList.add('error-field');
+                    } else {
+                        inputElement.classList.remove('error-field');
+                    }
+                }
+            }
+
+            function validateUsername(username) {
+                const usernameRegex = /^[A-Za-z0-9_]{5,20}$/;
+                return usernameRegex.test(username);
+            }
+
+            function validatePassword(password) {
+                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                return passwordRegex.test(password);
+            }
+
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function validateTerms(checkbox) {
+                return checkbox.checked;
+            }
+
+            function validateAge(ageInput) {
+                const age = parseInt(ageInput.value, 10);
+                if (isNaN(age) || age < 1 || age > 100) {
+                    return false;
+                }
+                return true;
+            }
+
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const termsCheckbox = document.getElementById('termsCheckbox');
+            const emailInput = document.getElementById('email');
+            const ageInput = document.getElementById('age');
+            const contactInput = document.getElementById('contact');
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+
+            usernameInput.addEventListener('input', function(e) {
+                const val = e.target.value;
+                if (!validateUsername(val) && val.length > 0) {
+                    setFieldError(usernameInput, 'usernameError', 'Username must be 5-20 characterss: letters, numbers, underscore only.');
+                } else {
+                    setFieldError(usernameInput, 'usernameError', '');
+                }
+            });
+
+            passwordInput.addEventListener('input', function(e) {
+                const val = e.target.value;
+                if (!validatePassword(val) && val.length > 0) {
+                    setFieldError(passwordInput, 'passwordError', 'Password must be min 8 characters, with uppercase, lowercase, number & special (@$!%*?&)');
+                } else {
+                    setFieldError(passwordInput, 'passwordError', '');
+                }
+            });
+
+            termsCheckbox.addEventListener('change', function() {
+                const termsError = document.getElementById('termsError');
+                if (termsCheckbox.checked) {
+                    termsError.textContent = '';
+                    document.getElementById('termsContainer').classList.remove('error-field');
+                }
+            });
+
+            document.getElementById('regForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value;
+                const email = emailInput.value.trim();
+                const termsAccepted = termsCheckbox.checked;
+
+                let isValid = true;
+
+                document.querySelectorAll('.error-field').forEach(el => el.classList.remove('error-field'));
+                document.getElementById('usernameError').textContent = '';
+                document.getElementById('passwordError').textContent = '';
+                document.getElementById('termsError').textContent = '';
+
+                if (!username) {
+                    setFieldError(usernameInput, 'usernameError', 'Username is required');
+                    isValid = false;
+                } else if (!validateUsername(username)) {
+                    setFieldError(usernameInput, 'usernameError', 'Username must be 5-20 chars: letters, numbers, underscore only');
+                    isValid = false;
+                }
+
+                if (!password) {
+                    setFieldError(passwordInput, 'passwordError', 'Password is required');
+                    isValid = false;
+                } else if (!validatePassword(password)) {
+                    setFieldError(passwordInput, 'passwordError', 'Password must be min 8 chars, with uppercase, lowercase, number & special (@$!%*?&)');
+                    isValid = false;
+                }
+
+                if (!email) {
+                    let emailErrorSpan = document.getElementById('emailError');
+                    if (!emailErrorSpan) {
+                        emailErrorSpan = document.createElement('span');
+                        emailErrorSpan.id = 'emailError';
+                        emailErrorSpan.className = 'error-message';
+                        emailInput.parentNode.insertBefore(emailErrorSpan, emailInput.nextSibling);
+                    }
+                    emailErrorSpan.textContent = 'Email is required';
+                    emailInput.classList.add('error-field');
+                    isValid = false;
+                } else if (!validateEmail(email)) {
+                    let emailErrorSpan = document.getElementById('emailError');
+                    if (!emailErrorSpan) {
+                        emailErrorSpan = document.createElement('span');
+                        emailErrorSpan.id = 'emailError';
+                        emailErrorSpan.className = 'error-message';
+                        emailInput.parentNode.insertBefore(emailErrorSpan, emailInput.nextSibling);
+                    }
+                    emailErrorSpan.textContent = 'Enter a valid email address (e.g., johndoe@gmail.com)';
+                    emailInput.classList.add('error-field');
+                    isValid = false;
+                } else {
+                    const emailErrorSpan = document.getElementById('emailError');
+                    if (emailErrorSpan) emailErrorSpan.textContent = '';
+                    emailInput.classList.remove('error-field');
+                }
+
+                if (!termsAccepted) {
+                    document.getElementById('termsError').textContent = 'You must accept the Terms and Privacy Policy';
+                    document.getElementById('termsContainer').classList.add('error-field');
+                    isValid = false;
+                } else {
+                    document.getElementById('termsContainer').classList.remove('error-field');
+                }
+
+                if (ageInput.value && !validateAge(ageInput)) {
+                    alert('Note: Age should be a number between 1 and 100');
+                }
+
+                if (isValid) {
+                    alert('Registration successful! Welcome to MTR 歡迎');
+                } else {
+                    alert('Registration unsuccessful! Please check the requirements');
+                }
+            });
+
+            document.getElementById('uploadPhotoBtn').addEventListener('click', function() {
+                const fileInput = document.getElementById('photoUpload');
+                if (fileInput.files.length > 0) {
+                    alert(`Selected: ${fileInput.files[0].name}\nPhoto uploaded successfully`);
+                } else {
+                    alert('Please choose a file first');
+                }
+            });
+
+            const emailParent = emailInput.parentNode;
+            const emailErrorSpan = document.createElement('span');
+            emailErrorSpan.id = 'emailError';
+            emailErrorSpan.className = 'error-message';
+            emailParent.insertBefore(emailErrorSpan, emailInput.nextSibling);
+        })();
+
+            document.getElementById('uploadPhotoBtn').addEventListener('click', function() {
+            const fileInput = document.getElementById('photoUpload');
+            const profileImage = document.getElementById('profileImage');
+            const profileText = document.getElementById('profileText');
+    
+             if (fileInput.files && fileInput.files[0]) {
+             const reader = new FileReader();
+        
+             reader.onload = function(e) {
+             profileImage.src = e.target.result;
+             profileImage.style.display = 'block';
+             profileText.style.display = 'none';
+        }
+        
+             reader.readAsDataURL(fileInput.files[0]);
+        } else {
+        alert('No file detected');
+    }
+});
+    </script>
+</body>
+</html>

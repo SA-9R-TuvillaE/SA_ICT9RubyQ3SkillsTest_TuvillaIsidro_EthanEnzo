@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', sans-serif
+}
+
+body {
+    background-color: #ffffff;
+    background-image: url(https://media.timeout.com/images/105869828/image.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;                
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee; 
+}
+
+.logo {
+    height: 48px;               
+    width: auto;               
+    max-height: 48px;          
+    display: flex;
+    align-items: center;
+}
+
+.logo img {                    
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #AF2A47;
+}
+
+.nav-buttons .book {
+    margin-right: 15px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.create-btn {
+    background-color: #229e22;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+}
+
+.create-btn:hover {
+    background-color: #127f21;
+}
+
+.hero {
+    min-height: calc(100vh-80px);
+    background: url("https://via.placeholder.com/1920x1080") no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; 
+}
+
+.registration-card {
+    display: flex;
+    width: 800px;
+    background: #AF2A47;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.left-panel {
+    width: 40%;
+    text-align: center;
+}
+
+.profile-placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    font-size: 14px;
+    overflow: hidden;  
+    position: relative; 
+}
+
+.upload-btn {
+    margin-top: 10px;
+    background-color: #63b9c5;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.upload-btn:hover {
+    background-color: #0097a7;
+}
+
+.right-panel {
+    width: 60%;
+    padding-left: 20px;
+}
+
+.right-panel h1 {
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.instructions {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row div {
+    flex: 1;
+}
+
+.terms {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #ffffff;
+    align-items: center      
+    align-items: center;    
+    gap: 8px;               
+}
+
+.terms input[type="checkbox"] {
+    width: auto;             
+    margin-top: 0;           
+    flex-shrink: 0;       
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #229e22;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #1b7e1b;
+}
+
+.cancel-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+    .file-upload-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
